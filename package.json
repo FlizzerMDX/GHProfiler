@@ -9,8 +9,18 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@lexical/html": "^0.40.0",
+    "@lexical/list": "^0.40.0",
+    "@lexical/markdown": "^0.40.0",
+    "@lexical/react": "^0.40.0",
+    "@lexical/rich-text": "^0.40.0",
+    "@lexical/selection": "^0.40.0",
+    "@lexical/utils": "^0.40.0",
+    "@lexkit/editor": "^0.0.38",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "lexical": "^0.40.0",
     "lucide-react": "^0.563.0",
     "next": "16.1.6",
     "next-auth": "^5.0.0-beta.30",

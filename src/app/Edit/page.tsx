@@ -1,6 +1,7 @@
 "use client";
 import type { NextPage } from 'next'
-import { useSession, signIn, signOut } from "next-auth/react"
+import { useSession } from "next-auth/react"
+import { Editor } from '@/components/editor/editor';
 
 const Edit: NextPage = () => {
   const { data: session } = useSession()
@@ -9,7 +10,7 @@ const Edit: NextPage = () => {
     <div>
         {
             session && session.user ?
-                <h1>Edit Page</h1>
+                <Editor/>
                 :
                 <span>You need to be authenticated to watch this page</span>
         }
