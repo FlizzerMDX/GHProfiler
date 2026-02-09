@@ -1,10 +1,10 @@
 "use client";
-import React from "react";
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
+import { User } from "next-auth";
 
-export const SignOut: React.FC = ({ user }) => {
+export const SignOut = ({ user }: {user: User}) => {
 	return (
 		<DropdownMenu modal={false}>
 			<DropdownMenuTrigger>

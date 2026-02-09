@@ -30,6 +30,7 @@ export default async function RootLayout({
 }>) {
 
   const session = await auth();
+  const user = session?.user;
 
   return (
     <html lang="en">
@@ -37,9 +38,11 @@ export default async function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased h-screen flex flex-col dark`}
       >
         <SessionProvider session={session}>
+          <Header user={user}/>
           <main className="m-auto">
             {children}
           </main>
+          <Footer/>
         </SessionProvider>
       </body>
     </html>
