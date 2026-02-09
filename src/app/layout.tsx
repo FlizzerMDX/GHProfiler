@@ -7,6 +7,7 @@ import { SessionProvider } from "@/components/auth/session-provider";
 import Header from "@/components/layout/header";
 import Footer from "@/components/layout/footer";
 import { auth } from "@/services/auth";
+import { Toaster } from "@/components/ui/sonner";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -43,6 +44,7 @@ export default async function RootLayout({
             {children}
           </main>
           <Footer/>
+          <Toaster position="top-center"/>
         </SessionProvider>
       </body>
     </html>
