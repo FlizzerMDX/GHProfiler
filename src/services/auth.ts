@@ -1,6 +1,8 @@
 import NextAuth from "next-auth"
 import GithubProvider from "next-auth/providers/github"
 
+import { Profile } from "@/types";
+
 export const { handlers, signIn, signOut, auth } = NextAuth({
     // Configure one or more authentication providers
     providers: [
@@ -18,10 +20,11 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
             }
             return token;
         },
-        async session({ session, token, user }) {
+        async session({ session, token }) {
+            const profile: Profile = token?.profile as Profile;
             return {
                 ...session,
-                user: {...session.user, username: token?.profile?.login},
+                user: {...session.user, username: profile?.login},
                 accessToken: token.accessToken,
             };
         },

@@ -1,6 +1,8 @@
 import { Octokit } from "@octokit/core";
 
-export const getReadmeRepo = async(user, token) =>{
+import { GithubApiCallSetting as Setting } from "@/types/index";
+
+export const getReadmeRepo = async(user: string, token: string) =>{
     const usr = user;
     const repo = user;
     const params = {
@@ -11,15 +13,14 @@ export const getReadmeRepo = async(user, token) =>{
             repo: repo,
         }
     }
-    const t = await githubApiCall(token, params);
-    console.log(t);
-    console.log(t?.data?.private);
+    const data = await githubApiCall(token, params);
+    return data;
 }
 
-export const getReadmeContent = async(user, token) =>{
+export const getReadmeContent = async(user: string, token: string) =>{
     const usr = user;
     const repo = user;
-    const params = {
+    const params: Setting = {
         method: "GET",
         url: `/repos/${usr}/${repo}/contents/README.md`,
         params: {
@@ -27,16 +28,16 @@ export const getReadmeContent = async(user, token) =>{
             repo: repo,
         }
     }
-    const t = await githubApiCall(token, params);
+    const data = await githubApiCall(token, params);
     const readme = {
         success: true,
-        content: atob(t?.data.content)
+        content: atob(data?.data.content)
     };
     console.log(readme)
     return readme;
 }
 
-const githubApiCall = async(token, settings) =>{
+const githubApiCall = async(token: string, settings: Setting) =>{
     const octokit = new Octokit({
         auth: token
     })

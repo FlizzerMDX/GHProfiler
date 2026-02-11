@@ -2,23 +2,28 @@
 import type { NextPage } from 'next'
 import { useSession } from "next-auth/react"
 import { Editor } from '@/components/editor/editor';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { getReadmeContent, getReadmeRepo } from '@/services/github';
+
+import { User, Session } from '@/types/index';
+import { ShadcnTemplateRef } from '@/components/editor';
 
 const Edit: NextPage = () => {
   const { data: session } = useSession();
+  const [user, setUser] = useState<User>(session?.user as User);
+  const [username, setUsername] = useState<string>(user?.username);
 
-  const editorRef = useRef(null);
-
-  let markdown;
+  const editorRef = useRef<ShadcnTemplateRef>(null);
 
   useEffect(() =>{
     const call = async() =>{
-      const repo = await getReadmeRepo(session?.user?.username, session?.accessToken);
-      const data = await getReadmeContent(session?.user?.username, session?.accessToken);
-      markdown = data?.success ? data?.content : "";
-      console.log(markdown)
-      editorRef.current.injectMarkdown(markdown);
+      const userSession = session as Session;
+      const repo = await getReadmeRepo(username, userSession?.accessToken);
+      if (repo?.data){
+        const data = await getReadmeContent(username, userSession?.accessToken);
+        const markdown = data?.success ? data?.content : "";
+        editorRef?.current?.injectMarkdown(markdown);
+      }
     };
     call();
   }, [])

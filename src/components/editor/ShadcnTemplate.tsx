@@ -39,7 +39,7 @@ import {
 import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { LexicalEditor } from "lexical";
-import { Bold, Italic, Underline, Strikethrough, List, ListOrdered, Undo, Redo, Image as ImageIcon, AlignLeft, AlignCenter, AlignRight, Upload, Link as LinkIcon, Unlink, Minus, Code, Terminal, Table as TableIcon, FileCode, Eye, Pencil, Command as CommandIcon, Type, Quote, FileText, Hash, X, CloudUpload, Globe, ChevronDown, Indent, Outdent } from "lucide-react";
+import { Bold, Italic, Underline, Strikethrough, List, ListOrdered, Undo, Redo, Image as ImageIcon, AlignLeft, AlignCenter, AlignRight, Upload, Link as LinkIcon, Unlink, Minus, Code, Table as TableIcon, FileCode, Eye, Command as CommandIcon, Type, Quote, FileText, Hash, X, CloudUpload, Globe, ChevronDown, Indent, Outdent } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Toggle } from "@/components/ui/toggle";
 import { CommandDialog, CommandEmpty, CommandGroup, CommandInput, CommandItem, CommandList, CommandShortcut } from "@/components/ui/command";
@@ -49,7 +49,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Separator } from "@/components/ui/separator";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { Switch } from "@/components/ui/switch";
 import { Dialog as ShadcnDialog, DialogContent, DialogHeader, DialogTitle, DialogFooter } from "@/components/ui/dialog";
 import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
@@ -635,7 +634,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.isImageAlignedLeft ? "pressed" : "default"}
+                  variant={activeStates.isImageAlignedLeft ? "outline" : "default"}
                   pressed={activeStates.isImageAlignedLeft}
                   onPressedChange={() => commands.setImageAlignment("left")}
                 >
@@ -649,7 +648,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.isImageAlignedCenter ? "pressed" : "default"}
+                  variant={activeStates.isImageAlignedCenter ? "outline" : "default"}
                   pressed={activeStates.isImageAlignedCenter}
                   onPressedChange={() => commands.setImageAlignment("center")}
                 >
@@ -663,7 +662,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.isImageAlignedRight ? "pressed" : "default"}
+                  variant={activeStates.isImageAlignedRight ? "outline" : "default"}
                   pressed={activeStates.isImageAlignedRight}
                   onPressedChange={() => commands.setImageAlignment("right")}
                 >
@@ -697,7 +696,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.bold ? "pressed" : "default"}
+                  variant={activeStates.bold ? "outline" : "default"}
                   pressed={activeStates.bold}
                   onPressedChange={() => commands.toggleBold()}
                 >
@@ -711,7 +710,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.italic ? "pressed" : "default"}
+                  variant={activeStates.italic ? "outline" : "default"}
                   pressed={activeStates.italic}
                   onPressedChange={() => commands.toggleItalic()}
                 >
@@ -725,7 +724,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.underline ? "pressed" : "default"}
+                  variant={activeStates.underline ? "outline" : "default"}
                   pressed={activeStates.underline}
                   onPressedChange={() => commands.toggleUnderline()}
                 >
@@ -739,7 +738,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.strikethrough ? "pressed" : "default"}
+                  variant={activeStates.strikethrough ? "outline" : "default"}
                   pressed={activeStates.strikethrough}
                   onPressedChange={() => commands.toggleStrikethrough()}
                 >
@@ -755,7 +754,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.code ? "pressed" : "default"}
+                  variant={activeStates.code ? "outline" : "default"}
                   pressed={activeStates.code}
                   onPressedChange={() => commands.formatText("code")}
                 >
@@ -769,7 +768,7 @@ function FloatingToolbarRenderer({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.isLink ? "pressed" : "default"}
+                  variant={activeStates.isLink ? "outline" : "default"}
                   pressed={activeStates.isLink}
                   disabled={!activeStates.isTextSelected && !activeStates.isLink}
                   onPressedChange={() => {
@@ -887,7 +886,7 @@ function Toolbar({
             <TooltipTrigger asChild>
               <Toggle
                 size="sm"
-                variant={activeStates.bold ? "pressed" : "default"}
+                variant={activeStates.bold ? "outline" : "default"}
                 pressed={activeStates.bold}
                 onPressedChange={() => commands.toggleBold()}
               >
@@ -901,7 +900,7 @@ function Toolbar({
             <TooltipTrigger asChild>
               <Toggle
                 size="sm"
-                variant={activeStates.italic ? "pressed" : "default"}
+                variant={activeStates.italic ? "outline" : "default"}
                 pressed={activeStates.italic}
                 onPressedChange={() => commands.toggleItalic()}
               >
@@ -915,7 +914,7 @@ function Toolbar({
             <TooltipTrigger asChild>
               <Toggle
                 size="sm"
-                variant={activeStates.underline ? "pressed" : "default"}
+                variant={activeStates.underline ? "outline" : "default"}
                 pressed={activeStates.underline}
                 onPressedChange={() => commands.toggleUnderline()}
               >
@@ -929,7 +928,7 @@ function Toolbar({
             <TooltipTrigger asChild>
               <Toggle
                 size="sm"
-                variant={activeStates.strikethrough ? "pressed" : "default"}
+                variant={activeStates.strikethrough ? "outline" : "default"}
                 pressed={activeStates.strikethrough}
                 onPressedChange={() => commands.toggleStrikethrough()}
               >
@@ -943,7 +942,7 @@ function Toolbar({
             <TooltipTrigger asChild>
               <Toggle
                 size="sm"
-                variant={activeStates.code ? "pressed" : "default"}
+                variant={activeStates.code ? "outline" : "default"}
                 pressed={activeStates.code}
                 onPressedChange={() => commands.formatText("code")}
               >
@@ -957,7 +956,7 @@ function Toolbar({
             <TooltipTrigger asChild>
               <Toggle
                 size="sm"
-                variant={activeStates.isLink ? "pressed" : "default"}
+                variant={activeStates.isLink ? "outline" : "default"}
                 pressed={activeStates.isLink}
                 disabled={!activeStates.isTextSelected && !activeStates.isLink}
                 onPressedChange={() => {
@@ -1021,7 +1020,7 @@ function Toolbar({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.unorderedList ? "pressed" : "default"}
+                  variant={activeStates.unorderedList ? "outline" : "default"}
                   pressed={activeStates.unorderedList}
                   onPressedChange={() => commands.toggleUnorderedList()}
                 >
@@ -1035,7 +1034,7 @@ function Toolbar({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.orderedList ? "pressed" : "default"}
+                  variant={activeStates.orderedList ? "outline" : "default"}
                   pressed={activeStates.orderedList}
                   onPressedChange={() => commands.toggleOrderedList()}
                 >
@@ -1218,7 +1217,7 @@ function Toolbar({
               <TooltipTrigger asChild>
                 <Toggle
                   size="sm"
-                  variant={activeStates.isHTMLEmbedSelected ? "pressed" : "default"}
+                  variant={activeStates.isHTMLEmbedSelected ? "outline" : "default"}
                   pressed={activeStates.isHTMLEmbedSelected}
                   onPressedChange={() => commands.insertHTMLEmbed()}
                 >
@@ -1507,15 +1506,15 @@ function EditorContent({
   const handleMarkdownChange = (markdown: string) => setContent((prev) => ({ ...prev, markdown }));
 
   return (
-    <div className="flex flex-col min-h-[500px]">
+    <div className="flex flex-col min-h-[500px] border border-gray-500 rounded-3xl w-4xl">
       {/* Mode Tabs at top */}
-      <div className="px-4 py-3 border-b border-border">
+      {/* <div className="px-4 py-3 border-b border-border">
         <ModeTabs mode={mode} onModeChange={handleModeChange} />
-      </div>
+      </div> */}
 
       {/* Sticky Toolbar Header - only show in visual mode */}
       {mode === "visual" && (
-        <div className="z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border">
+        <div className="z-10 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b border-border rounded-t-3xl">
           <div className="px-4 py-3">
             <Toolbar
               commands={commands}
@@ -1579,8 +1578,8 @@ function EditorContent({
           <CommandEmpty>No results found.</CommandEmpty>
           {Object.entries(
             commandsToCommandPaletteItems(commands).reduce(
-              (groups, cmd) => {
-                const category = cmd.category || "Other";
+              (groups, cmd: any) => {
+                const category: string = cmd.category || "Other";
                 if (!groups[category]) groups[category] = [];
                 groups[category].push(cmd);
                 return groups;
@@ -1589,7 +1588,7 @@ function EditorContent({
             ),
           ).map(([category, categoryCommands]) => (
             <CommandGroup key={category} heading={category}>
-              {categoryCommands.map((cmd: any) => (
+              {(categoryCommands as any).map((cmd: any) => (
                 <CommandItem
                   key={cmd.id}
                   onSelect={() => {

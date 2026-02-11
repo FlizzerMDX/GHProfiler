@@ -1,8 +1,5 @@
-import type {
-  ExtractCommands,
-  BaseCommands,
-} from "@lexkit/editor/extensions/types";
-import type { CommandPaletteItem } from "@lexkit/editor/extensions/core";
+import { ExtractCommands, BaseCommands } from "@lexkit/editor";
+import type { CommandPaletteItem } from "@lexkit/editor";
 
 // Import extensions from the Shadcn template
 import { extensions } from "./ShadcnTemplate";

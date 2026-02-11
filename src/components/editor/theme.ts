@@ -1,4 +1,3 @@
-import React from "react";
 import { LexKitTheme } from "@lexkit/editor";
 
 export const shadcnTheme: LexKitTheme = {

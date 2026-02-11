@@ -1,18 +1,15 @@
 "use client";
 
-import { ShadcnTemplate } from './index'
+import { Ref } from 'react';
+import { ShadcnTemplate, ShadcnTemplateRef } from './index'
 
-export function Editor({markdown, ref}: {markdown: string, ref: any}) {
+export function Editor({markdown, ref}: {markdown?: string, ref: Ref<ShadcnTemplateRef>}) {
   return (
     <ShadcnTemplate
       onReady={(editor) => {
-        console.log('Editor ready!')
-        // Access editor methods here
-        console.log('Write in markdown!')
-        // editor.injectHTML("<div>test</div>")
-        editor.injectMarkdown(markdown)
-        // editor.injectMarkdown("[test](https://midicix.vercel.app)")
-        // console.log(editor.getMarkdown());
+        if (markdown){
+          editor.injectMarkdown(markdown);
+        }
       }}
       ref={ref}
     />
