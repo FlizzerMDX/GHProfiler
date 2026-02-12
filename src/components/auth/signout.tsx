@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { signOut } from "next-auth/react";
-import { User } from "next-auth";
+import { User } from "@/types";
 
 export const SignOut = ({ user }: {user: User}) => {
 	return (
@@ -17,7 +17,7 @@ export const SignOut = ({ user }: {user: User}) => {
 						height="30"
 					/>
 					<p className="text-primary-secondary text-sm sm:text-base font-medium">
-						{user?.name}
+						{user?.username}
 					</p>
 				</div>
 			</DropdownMenuTrigger>

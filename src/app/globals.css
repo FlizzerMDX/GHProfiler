@@ -44,7 +44,8 @@
   --radius-2xl: calc(var(--radius) + 8px);
   --radius-3xl: calc(var(--radius) + 12px);
   --radius-4xl: calc(var(--radius) + 16px);
-  --color-layout: oklch(25.152% 0.05292 257.967);
+  --color-layout: var(--layout);
+  --color-hover: var(--text-hover);
 }
 
 :root {
@@ -114,6 +115,8 @@
   --sidebar-accent-foreground: oklch(0.985 0 0);
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
+  --layout: oklch(25.152% 0.05292 257.967);
+  --text-hover: oklch(0.6751 0.1209 230.82);
 }
 
 @layer base {

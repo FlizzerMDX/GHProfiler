@@ -33,7 +33,6 @@ export const getReadmeContent = async(user: string, token: string) =>{
         success: true,
         content: atob(data?.data.content)
     };
-    console.log(readme)
     return readme;
 }
 

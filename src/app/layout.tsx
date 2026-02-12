@@ -9,9 +9,13 @@ import Footer from "@/components/layout/footer";
 import { auth } from "@/services/auth";
 import { Toaster } from "@/components/ui/sonner";
 
+import GHProfilerIconLight from '../../public/ghprofiler-light.webp'
+import GHProfilerIconDark from '../../public/ghprofiler-dark.webp'
+
 // Vercel
 import { SpeedInsights } from "@vercel/speed-insights/next";
 import { Analytics } from "@vercel/analytics/next";
+import { User } from "@/types";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -26,6 +30,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "GHProfiler",
   description: "Your solution to get you generated Readme GitHub Profil!",
+  icons: GHProfilerIconDark.src
 };
 
 export default async function RootLayout({
@@ -35,7 +40,7 @@ export default async function RootLayout({
 }>) {
 
   const session = await auth();
-  const user = session?.user;
+  const user: User = session?.user as User;
 
   return (
     <html lang="en">
