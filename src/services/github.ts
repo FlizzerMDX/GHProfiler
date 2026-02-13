@@ -1,6 +1,6 @@
 import { Octokit } from "@octokit/core";
 
-import { GithubApiCallSetting as Setting } from "@/types/index";
+import { GithubApiCallSetting as Setting, User } from "@/types/index";
 
 export const getReadmeRepo = async(user: string, token: string) =>{
     const usr = user;
@@ -30,10 +30,27 @@ export const getReadmeContent = async(user: string, token: string) =>{
     }
     const data = await githubApiCall(token, params);
     const readme = {
-        success: true,
-        content: atob(data?.data.content)
+        success: data?.data?.content ? true : false,
+        content: data?.data?.content ? decodeURIComponent(escape(atob(data?.data?.content))) : ""
     };
+    console.log(readme)
     return readme;
+}
+
+export const pushReadmeToGithub = async({markdown, user, accessToken}: {markdown: string, user: string, accessToken: string}) =>{
+    const usr = user;
+    const repo = user;
+    const base64 = btoa(unescape(encodeURIComponent(markdown)));
+    const params = {
+        method: "GET",
+        url: `/repos/${usr}/${repo}`,
+        params: {
+            owner: usr,
+            repo: repo,
+        }
+    }
+    const data = await githubApiCall(token, params);
+    return data;
 }
 
 const githubApiCall = async(token: string, settings: Setting) =>{

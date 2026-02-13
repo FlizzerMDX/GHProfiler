@@ -26,7 +26,7 @@ const Header = ({ user }: {user: User }) =>{
                 </span>
             </Link>
             <nav>
-                <Link href={"/Edit"} className="text-2xl hover:text-hover hover:cursor-pointer pl-2 ml-1 sm:block text-white hidden">
+                <Link href={"/edit"} className="text-2xl hover:text-hover hover:cursor-pointer pl-2 ml-1 sm:block text-white hidden">
                     Edit page
                 </Link>
             </nav>

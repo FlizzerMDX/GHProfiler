@@ -60,6 +60,7 @@ import {
 import { shadcnTheme } from "./theme";
 import { cn } from "@/lib/utils";
 import "./shadcn-styles.css";
+import { SaveButton } from "./save-button";
 
 // Editor Mode Types
 type EditorMode = "visual" | "html" | "markdown";
@@ -1295,15 +1296,16 @@ function ModeTabs({
       value={mode}
       onValueChange={(value: string) => onModeChange(value as EditorMode)}
     >
-      <TabsList className="grid w-full max-w-md grid-cols-3 bg-muted/50">
+      {/* <TabsList className="grid w-full max-w-md grid-cols-3 bg-muted/50"> */}
+      <TabsList className="grid w-full max-w-md grid-cols-2 bg-muted/50">
         <TabsTrigger value="visual" className="flex items-center gap-2 text-sm">
           <Eye className="h-4 w-4" />
           Visual
         </TabsTrigger>
-        <TabsTrigger value="html" className="flex items-center gap-2 text-sm">
+        {/* <TabsTrigger value="html" className="flex items-center gap-2 text-sm">
           <FileCode className="h-4 w-4" />
           HTML
-        </TabsTrigger>
+        </TabsTrigger> */}
         <TabsTrigger
           value="markdown"
           className="flex items-center gap-2 text-sm"
@@ -1391,18 +1393,11 @@ function EditorContent({
   const methods = useMemo<ShadcnTemplateRef>(
     () => ({
       injectMarkdown: (content: string) => {
-        // if (editor) {
-        //   editor.update(() => {
-        //     commandsRef.current.importFromMarkdown(content, { immediate: true });
-        //   });
-        // }
-        setTimeout(() => {
-          if (editor) {
-            editor.update(() => {
-              commandsRef.current.importFromMarkdown(content, { immediate: true });
-            });
-          }
-        }, 50); // Small delay to ensure editor is ready
+        if (editor) {
+          editor.update(() => {
+            commandsRef.current.importFromMarkdown(content, { immediate: true });
+          });
+        }
       },
       injectHTML: (content: string) => {
         if (editor) {
@@ -1508,9 +1503,11 @@ function EditorContent({
   return (
     <div className="flex flex-col min-h-[500px] border border-gray-500 rounded-3xl w-4xl">
       {/* Mode Tabs at top */}
-      {/* <div className="px-4 py-3 border-b border-border">
+      {/* <div className="px-4 py-3 border-b border-border"> */}
+      <div className="px-4 py-3 border-b border-border flex justify-between">
         <ModeTabs mode={mode} onModeChange={handleModeChange} />
-      </div> */}
+        <SaveButton/>
+      </div>
 
       {/* Sticky Toolbar Header - only show in visual mode */}
       {mode === "visual" && (
