@@ -7,22 +7,24 @@ import {
   DropdownMenuContent,
   DropdownMenuGroup,
   DropdownMenuItem,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu"
+import { downloadEditingFile } from "@/services/download"
+import { Session, User } from "@/types"
 import {
-  AlertTriangleIcon,
-  CheckIcon,
   ChevronDownIcon,
-  CopyIcon,
   DownloadIcon,
   ShareIcon,
-  TrashIcon,
-  UserRoundXIcon,
-  VolumeOffIcon,
 } from "lucide-react"
+import { useSession } from "next-auth/react"
+import { useState } from "react"
 
-export function SaveButton() {
+export function SaveButton({editorRef}: {editorRef: any}) {
+
+  const { data: session } = useSession();
+  const [user, setUser] = useState<User>(session?.user as User);
+  const [token, setToken] = useState<string>((session as Session)?.accessToken);
+
   return (
     <ButtonGroup>
       <Button variant="outline" onClick={() => console.log("push file")}>
@@ -31,13 +33,13 @@ export function SaveButton() {
       </Button>
       <DropdownMenu>
         <DropdownMenuTrigger asChild>
-          <Button variant="outline" className="!pl-2">
+          <Button variant="outline" className="pl-2!">
             <ChevronDownIcon />
           </Button>
         </DropdownMenuTrigger>
         <DropdownMenuContent align="end" className="w-44">
           <DropdownMenuGroup>
-            <DropdownMenuItem onClick={() => console.log("download file")}>
+            <DropdownMenuItem onClick={() => {downloadEditingFile(editorRef, user)}}>
               <DownloadIcon />
               Download File
             </DropdownMenuItem>

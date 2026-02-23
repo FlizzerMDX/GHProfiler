@@ -1506,7 +1506,7 @@ function EditorContent({
       {/* <div className="px-4 py-3 border-b border-border"> */}
       <div className="px-4 py-3 border-b border-border flex justify-between">
         <ModeTabs mode={mode} onModeChange={handleModeChange} />
-        <SaveButton/>
+        <SaveButton editorRef={commandsRef.current}/>
       </div>
 
       {/* Sticky Toolbar Header - only show in visual mode */}
