@@ -49,7 +49,7 @@ export const pushReadmeToGithub = async({markdown, user, accessToken}: {markdown
             repo: repo,
         }
     }
-    const data = await githubApiCall(token, params);
+    const data = await githubApiCall(accessToken, params);
     return data;
 }
 

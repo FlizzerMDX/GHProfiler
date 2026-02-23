@@ -1,10 +1,10 @@
 "use client";
 
-import { Ref, useEffect, useState } from 'react';
+import { RefObject, useEffect, useState } from 'react';
 import { ShadcnTemplate, ShadcnTemplateRef } from './index'
 import { getReadmeContent } from '@/services/github';
 
-export function Editor({markdown, ref, session }: {markdown?: string, ref?: Ref<ShadcnTemplateRef>, session?: any}) {
+export function Editor({markdown, ref, session }: {markdown?: string, ref?: RefObject<ShadcnTemplateRef | null>, session?: any}) {
   useEffect(()=>{
     const call = async() =>{
       const data = await getReadmeContent(session?.user?.username, session?.accessToken);
