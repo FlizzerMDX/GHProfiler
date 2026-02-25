@@ -33,7 +33,6 @@ export const getReadmeContent = async(user: string, token: string) =>{
         success: data?.data?.content ? true : false,
         content: data?.data?.content ? decodeURIComponent(escape(atob(data?.data?.content))) : ""
     };
-    console.log(readme)
     return readme;
 }
 
@@ -67,13 +66,12 @@ export const pushReadmeToGithub = async({markdown, user, token, message}: {markd
     markdown += "\n";
     const needCommit = await doesReadmeChangesNeedCommit(markdown, user.username, token);
     if (!needCommit){
-        return false;
+        return undefined;
     }
 
 
     const fileData = await GetFileData({user, token});
     const sha = fileData?.sha;
-    console.log(sha)
 
     const username = user.username
     const usr = username;
@@ -97,7 +95,6 @@ export const pushReadmeToGithub = async({markdown, user, token, message}: {markd
     }
 
     const data = await githubApiCall(token, params);
-
     return data;
 }
 
