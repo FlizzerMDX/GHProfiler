@@ -1,8 +1,10 @@
 "use client";
 import Image from "next/image";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { UserSearch, LogOutIcon } from "lucide-react"
 import { signOut } from "next-auth/react";
 import { User } from "@/types";
+import Link from "next/link";
 
 export const SignOut = ({ user }: {user: User}) => {
 	return (
@@ -22,7 +24,13 @@ export const SignOut = ({ user }: {user: User}) => {
 				</div>
 			</DropdownMenuTrigger>
 			<DropdownMenuContent>
-				<DropdownMenuItem onSelect={() => signOut({ redirectTo: "/" })}>
+				<DropdownMenuItem onClick={() => window.open(`https://github.com/${user.username}`, "_blank")}>
+					<UserSearch/>
+					GitHub Profile
+				</DropdownMenuItem>
+				<DropdownMenuSeparator/>
+				<DropdownMenuItem onSelect={() => signOut({ redirectTo: "/" })} variant="destructive">
+					<LogOutIcon/>
 					Sign out
 				</DropdownMenuItem>
 			</DropdownMenuContent>
