@@ -1277,7 +1277,7 @@ function Toolbar({
                 <CommandIcon className="h-4 w-4" />
               </Button>
             </TooltipTrigger>
-            <TooltipContent>Command Palette (Ctrl+K)</TooltipContent>
+            <TooltipContent>Command Palette (Ctrl+Shift+P)</TooltipContent>
           </Tooltip>
         </div>
       </div>
@@ -1471,7 +1471,7 @@ function EditorContent({
     const unregisterShortcuts = registerKeyboardShortcuts(commands, document.body);
 
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+      if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key.toLocaleLowerCase() === "p") {
         e.preventDefault();
         setCommandPaletteOpen(true);
       }
@@ -1483,9 +1483,9 @@ function EditorContent({
     onReadyRef.current?.(methods);
 
     return () => {
-      unregisterShortcuts();
-      document.removeEventListener("keydown", handleKeyDown);
-      (commands as any).showCommandPalette = originalShowCommand;
+      // unregisterShortcuts();
+      // document.removeEventListener("keydown", handleKeyDown);
+      // (commands as any).showCommandPalette = originalShowCommand;
     };
   }, [editor, commands, methods]); // Only depend on editor and commands
 
