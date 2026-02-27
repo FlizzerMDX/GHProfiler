@@ -60,7 +60,7 @@ const Edit: NextPage = () => {
               repo ?
                 <Editor ref={editorRef} session={session}/>
                 :
-                <EmptyProject user={user}/>
+                <EmptyProject setRepo={setRepo}/>
               :
               <span>You need to be authenticated to watch this page</span>
         }

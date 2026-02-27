@@ -43,7 +43,7 @@ export function SaveButton({editorRef}: {editorRef: any}) {
               }),
             {
               loading: "Loading...",
-              success: (data) => {console.log(data); setIsPushing(false); return `Changes has been pushed`},
+              success: (data) => {setIsPushing(false); return `Changes has been pushed`},
               error: "Error",
             }
           )
