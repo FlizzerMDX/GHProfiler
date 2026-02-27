@@ -9,6 +9,7 @@ import { User, Session } from '@/types/index';
 import { ShadcnTemplateRef } from '@/components/editor';
 import { EmptyProject } from '@/components/editor/empty-project';
 import { EditorSkeleton } from '@/components/editor/editor-skeleton';
+import { Button } from '@/components/ui/button';
 
 const Edit: NextPage = () => {
   const { data: session } = useSession();
@@ -25,13 +26,6 @@ const Edit: NextPage = () => {
       const userSession = session as Session;
       const repo = await getReadmeRepo(username, userSession?.accessToken);
       setRepo(repo?.data);
-      // if (repo?.data){
-      //   const data = await getReadmeContent(username, userSession?.accessToken);
-      //   setEndCall(true);
-      //   const md = data?.success ? data?.content : "";
-      //   setMarkdown(md);
-      //   editorRef?.current?.injectMarkdown(md);
-      // }
       setEndCall(true);
     };
     call();
@@ -39,30 +33,12 @@ const Edit: NextPage = () => {
 
   return (
     <>
-        {/* {
+        <Editor ref={editorRef} session={session} hidden={!endCall} repo={repo}/>
+        {
             session && session.user ?
-                // endCall ?
-                //     repo ?
-                //         <Editor ref={editorRef} session={session}/>
-                //         :
-                //         <EmptyProject user={user}/>
-                //     :
-                //     <EditorSkeleton/>
-                repo ? 
-                  <Editor ref={editorRef} session={session}/>
-                  : 
-                  <EmptyProject user={user}/>
+                !repo && (<EmptyProject setRepo={setRepo}/>)
                 :
                 <span>You need to be authenticated to watch this page</span>
-        } */}
-        {
-            session && session.user?
-              repo ?
-                <Editor ref={editorRef} session={session}/>
-                :
-                <EmptyProject setRepo={setRepo}/>
-              :
-              <span>You need to be authenticated to watch this page</span>
         }
     </>
   )

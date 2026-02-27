@@ -37,7 +37,7 @@ export function EmptyProject({setRepo}: {setRepo: Dispatch<SetStateAction<object
         }),
       {
         loading: "Loading...",
-        success: (data) => {setIsPushing(false); setRepo(data); return markdown ? "Empty project created" : "File has been imported"},
+        success: (data) => {setIsPushing(false); setRepo(data); return markdown ? "File has been imported" : "Empty project created"},
         error: (data) => {setIsPushing(false); return `Error`},
       }
     )
@@ -68,7 +68,7 @@ export function EmptyProject({setRepo}: {setRepo: Dispatch<SetStateAction<object
         <EmptyMedia variant="icon">
           <IconFolderCode />
         </EmptyMedia>
-        <EmptyTitle>No Projects Yet</EmptyTitle>
+        <EmptyTitle>No Project Yet</EmptyTitle>
         <EmptyDescription>
           You haven&apos;t created your project yet. Get started by creating
           your project from scratch or with importing file by clicking in the buttons below.
