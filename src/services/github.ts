@@ -68,7 +68,7 @@ export const initReadmeToGithub = async({markdown, user, token}: {markdown: stri
     const username = user.username
     const usr = username;
     const repo = username;
-    const base64 = btoa(unescape(encodeURIComponent(markdown || "")));
+    const base64 = btoa(unescape(encodeURIComponent(markdown || "<!-- Readme gerenated with Moonarr ! -->")));
     const params = {
         method: "PUT",
         url: `/repos/${usr}/${repo}/contents/README.md`,

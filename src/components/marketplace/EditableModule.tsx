@@ -1,6 +1,6 @@
 import ComponantColorPicker from "./color-picker";
 import { Input } from "../ui/input";
-import { Params } from "@/types/modules";
+import { Param } from "@/types/modules";
 import { Settings2 } from "lucide-react";
 import { Module } from "@/types/modules";
 import { Dialog, DialogClose, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle, DialogTrigger } from "../ui/dialog";
@@ -12,45 +12,82 @@ import { User } from "@/types";
 import { Field, FieldGroup } from "../ui/field";
 import { Label } from "../ui/label";
 import { Color } from "react-aria-components";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 
 const createLink = (url: string, params: any) =>{
     const linkParameters = Object.keys(params).map((param, index) => `${index === 0 ? "?" : "&"}${param}=${params[param]}`).join("");
     return url + linkParameters;
 }
 
-export const ParamComponent = ({params, setParams, param, defaultValue}: {params: object, setParams: Dispatch<SetStateAction<object>>, param: Params, defaultValue?: string}) => {
+export const ParamComponent = ({params, setParams, param, defaultValue}: {params: object, setParams: Dispatch<SetStateAction<object>>, param: Param, defaultValue?: string}) => {
     switch(param.type){
         case "color":
             const [color, setColor] = useState<Color>();
-            // useEffect(() =>{
-            //     setParams({...params, [param.key] : color?.toString("hex") || ""});
-            // }, [color]);
             return(
                 <Field onBlur={() => setParams({...params, [param.key] : color?.toString("hex").replace("#", "") || ""})}>
                     <Label htmlFor={`${param.name}-1`} className="capitalize">{param.name}</Label>
                     <ComponantColorPicker color={color} setColor={setColor}/>
                 </Field>
             )
-        default:
-            const [value, setValue] = useState<string>(defaultValue && param.name.toLowerCase() === "username" ? defaultValue : ""); //params[param.key]
+        case "number":
+            const [number, setNumber] = useState<number>(0); //params[param.key]
             useEffect(() =>{
-                setParams({...params, [param.key] : value});
-            }, [value]);
+                setParams({...params, [param.key] : number});
+            }, [number]);
             return (
                 <Field>
                     <Label htmlFor={`${param.name}-1`} className="capitalize">{param.name}</Label>
                     <Input 
                     id={`${param.name}-1`} 
                     name={`${param.name}`}
-                    value={value}
-                    onChange={(e) => setValue(e.target.value)} />
+                    type="number"
+                    value={number}
+                    onChange={(e) => setNumber(parseInt(e.target.value))} />
+                </Field>
+            );
+        case "select":
+            const [selectValue, setSelectValue] = useState<string>(); //params[param.key]
+            useEffect(() =>{
+                setParams({...params, [param.key] : selectValue});
+            }, [selectValue]);
+            return (
+                <Field>
+                    <Label htmlFor={`${param.name}-1`} className="capitalize">{param.name}</Label>
+                    <Select onValueChange={(e) => setSelectValue(e)}>
+                        <SelectTrigger className="w-full max-w-48">
+                            <SelectValue placeholder="Select a fruit" />
+                        </SelectTrigger>
+                        <SelectContent position="popper">
+                            <SelectGroup>
+                            <SelectLabel>{param.name}</SelectLabel>
+                            {
+                                param.options?.map((option) => <SelectItem key={option.key} value={option.key}>{option.name}</SelectItem>)
+                            }
+                            </SelectGroup>
+                        </SelectContent>
+                    </Select>
+                </Field>
+            );
+        default:
+            const [stringValue, setStringValue] = useState<string>(defaultValue && param.name.toLowerCase() === "username" ? defaultValue : ""); //params[param.key]
+            useEffect(() =>{
+                setParams({...params, [param.key] : stringValue});
+            }, [stringValue]);
+            return (
+                <Field>
+                    <Label htmlFor={`${param.name}-1`} className="capitalize">{param.name}</Label>
+                    <Input 
+                    id={`${param.name}-1`} 
+                    name={`${param.name}`}
+                    value={stringValue}
+                    onChange={(e) => setStringValue(e.target.value)} />
                 </Field>
             );
     }
 };
 
 const ParamDialog = ({children, module, editorRef, user}: {children: ReactNode, module: Module, editorRef?: RefObject<ShadcnTemplateRef | null>, user: User}) =>{
-    const [params, setParams] = useState<object>(Object.fromEntries(module.params.map((param) => [param.key, ""])));
+    const [params, setParams] = useState<object>(Object.fromEntries(module.params.map((param) => [param.key, param.key.toLowerCase() === "username" ? user.username : ""])));
     const [src, setSrc] = useState<string>(createLink(module.link, params));
     useEffect(() =>{
         setSrc(createLink(module.link, params));
@@ -83,7 +120,7 @@ const ParamDialog = ({children, module, editorRef, user}: {children: ReactNode, 
                 <DialogClose asChild>
                     <Button 
                     variant="outline" 
-                    onClick={() => editorRef?.current?.addHTML(renderToString(<img src={src} />))}>
+                    onClick={() => editorRef?.current?.addHTML(renderToString(<img src={src} alt={module.repo}/>))}>
                         Add to Readme
                     </Button>
                 </DialogClose>

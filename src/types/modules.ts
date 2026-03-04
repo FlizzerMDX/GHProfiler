@@ -5,14 +5,20 @@ export interface Module{
     repo: string,
     link: string,
     tags: string[],
-    params: Params[],
+    params: Param[],
 }
 
-export interface Params{
+export interface Option{
+    key: string,
+    name: string
+}
+
+export interface Param{
     key: string,
     name: string,
     description: string,
     type: string,
+    options?: Option[]
     required: boolean,
 }
 

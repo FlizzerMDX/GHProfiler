@@ -32,3 +32,60 @@ modules:
         description: Color of the border (in hexadecimal)
         type: color
         required: false
+  - key: prStats
+    name: GitHub PR Stats
+    description: GitHub PR Stats
+    repo: https://github.com/f14XuanLv/github-pr-stats
+    link: https://github-pr-stats-five.vercel.app/api/github-pr-stats
+    tags:
+      - stats
+    params:
+      - key: username
+        name: username
+        description: username
+        type: string
+        required: true
+      - key: min_stars
+        name: min_stars
+        description: minimum of repository stars
+        type: number
+        required: false
+      - key: limit
+        name: limit
+        description: limit of result
+        type: number
+        required: false
+      - key: status
+        name: status
+        description: Status
+        type: select
+        options:
+          - key: merged
+            name: Merged
+          - key: open
+            name: Open
+          - key: draft
+            name: Draft
+          - key: closed
+            name: Closed
+        required: false
+      - key: mode
+        name: mode
+        description: Mode
+        type: select
+        options:
+          - key: pr-list
+            name: PR list
+          - key: repo-aggregate
+            name: Repository Aggregate
+        required: false
+      - key: theme
+        name: theme
+        description: Theme
+        type: select
+        options:
+          - key: light
+            name: Light
+          - key: dark
+            name: Dark
+        required: false
