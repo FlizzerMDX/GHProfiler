@@ -62,16 +62,17 @@ function EyeDropperButton() {
   )
 }
 
-export function ComponantColorPicker({label, color, setColor}: {label?: string, color: Color | undefined, setColor: Dispatch<SetStateAction<Color | undefined>>}) {
+export function ComponantColorPicker({color, setColor}: {color: Color | undefined, setColor: Dispatch<SetStateAction<Color | undefined>>}) {
   let [space, setSpace] = useState<string>("hex")
 
   return (
     <ColorPicker value={color} onChange={setColor}>
       <DialogTrigger>
-        <Button variant="ghost" className="flex h-fit items-center gap-2 p-1">
-          <ColorSwatch className="size-8 rounded-md border-2" />
-          {label}
-        </Button>
+        <div>
+          <Button variant="ghost" className="flex h-fit items-center gap-2 p-1 mx-auto">
+            <ColorSwatch className="size-8 rounded-md border-2 border-gray-800" />
+          </Button>
+        </div>
         <Popover placement="bottom start" className="w-fit">
           <Dialog className="flex flex-col gap-4 p-3 outline-none">
             <div>

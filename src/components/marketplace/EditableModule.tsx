@@ -15,6 +15,10 @@ import { Color } from "react-aria-components";
 import { Select, SelectContent, SelectGroup, SelectItem, SelectLabel, SelectTrigger, SelectValue } from "../ui/select";
 import { Card, CardAction, CardDescription, CardFooter, CardHeader, CardTitle } from "../ui/card";
 import { Badge } from "../ui/badge";
+import { ColorField } from "./param/color-field";
+import { NumberField } from "./param/number-field";
+import { SelectField } from "./param/select-field";
+import { StringField } from "./param/string-field";
 
 const createLink = (url: string, params: any) =>{
     const linkParameters = Object.keys(params).map((param, index) => `${index === 0 ? "?" : "&"}${param}=${params[param]}`).join("");
@@ -26,10 +30,7 @@ export const ParamComponent = ({params, setParams, param, defaultValue}: {params
         case "color":
             const [color, setColor] = useState<Color>();
             return(
-                <Field onBlur={() => setParams({...params, [param.key] : color?.toString("hex").replace("#", "") || ""})}>
-                    <Label htmlFor={`${param.name}-1`} className="capitalize">{param.name}</Label>
-                    <ComponantColorPicker color={color} setColor={setColor}/>
-                </Field>
+                <ColorField param={param} params={params} setParams={setParams} color={color} setColor={setColor} />
             )
         case "number":
             const [number, setNumber] = useState<number>(0); //params[param.key]
@@ -37,15 +38,7 @@ export const ParamComponent = ({params, setParams, param, defaultValue}: {params
                 setParams({...params, [param.key] : number});
             }, [number]);
             return (
-                <Field>
-                    <Label htmlFor={`${param.name}-1`} className="capitalize">{param.name}</Label>
-                    <Input 
-                    id={`${param.name}-1`} 
-                    name={`${param.name}`}
-                    type="number"
-                    value={number}
-                    onChange={(e) => setNumber(parseInt(e.target.value))} />
-                </Field>
+                <NumberField param={param} number={number} setNumber={setNumber}/>
             );
         case "select":
             const [selectValue, setSelectValue] = useState<string>(); //params[param.key]
@@ -53,22 +46,7 @@ export const ParamComponent = ({params, setParams, param, defaultValue}: {params
                 setParams({...params, [param.key] : selectValue});
             }, [selectValue]);
             return (
-                <Field>
-                    <Label htmlFor={`${param.name}-1`} className="capitalize">{param.name}</Label>
-                    <Select onValueChange={(e) => setSelectValue(e)}>
-                        <SelectTrigger className="w-full max-w-48">
-                            <SelectValue placeholder="Select a fruit" />
-                        </SelectTrigger>
-                        <SelectContent position="popper">
-                            <SelectGroup>
-                            <SelectLabel>{param.name}</SelectLabel>
-                            {
-                                param.options?.map((option) => <SelectItem key={option.key} value={option.key}>{option.name}</SelectItem>)
-                            }
-                            </SelectGroup>
-                        </SelectContent>
-                    </Select>
-                </Field>
+                <SelectField param={param} setSelectValue={setSelectValue} />
             );
         default:
             const [stringValue, setStringValue] = useState<string>(defaultValue && param.name.toLowerCase() === "username" ? defaultValue : ""); //params[param.key]
@@ -76,14 +54,7 @@ export const ParamComponent = ({params, setParams, param, defaultValue}: {params
                 setParams({...params, [param.key] : stringValue});
             }, [stringValue]);
             return (
-                <Field>
-                    <Label htmlFor={`${param.name}-1`} className="capitalize">{param.name}</Label>
-                    <Input 
-                    id={`${param.name}-1`} 
-                    name={`${param.name}`}
-                    value={stringValue}
-                    onChange={(e) => setStringValue(e.target.value)} />
-                </Field>
+                <StringField param={param} stringValue={stringValue} setStringValue={setStringValue} />
             );
     }
 };
@@ -99,7 +70,7 @@ const ParamDialog = ({children, module, editorRef, user}: {children: ReactNode, 
         <DialogTrigger asChild>
             {children}
         </DialogTrigger>
-        <DialogContent className="sm:max-w-2xl">
+        <DialogContent className="sm:max-w-4xl">
             <DialogHeader>
                 <DialogTitle>Edit Module</DialogTitle>
                 <DialogDescription>
@@ -108,16 +79,16 @@ const ParamDialog = ({children, module, editorRef, user}: {children: ReactNode, 
                 </DialogDescription>
             </DialogHeader>
             <div className="flex gap-8">
-                <FieldGroup className="sm:max-w-60">
+                <FieldGroup className="w-14 grow">
                     {module?.params.map((param) => <ParamComponent params={params} setParams={setParams} param={param} key={param.key} defaultValue={user.username}/>)}
                 </FieldGroup>
-                <div className="flex align-middle">
+                <div className="flex align-middle w-14 grow-4">
                     <img src={src} draggable={false}/>
                 </div>
             </div>
             <DialogFooter>
                 <DialogClose asChild>
-                    <Button variant="outline" onClick={() => console.log(params)}>Cancel</Button>
+                    <Button variant="outline">Cancel</Button>
                 </DialogClose>
                 <DialogClose asChild>
                     <Button 
