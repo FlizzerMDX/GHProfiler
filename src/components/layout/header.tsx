@@ -8,8 +8,7 @@ import { SignOut } from "../auth/signout";
 import { User } from "@/types";
 import Image from "next/image";
 
-import MoonarrIconLight from '../../../public/images/moonarr-light.webp'
-import MoonarrIconDark from '../../../public/images/moonarr-dark.webp'
+import { MoonarrIconDark, MoonarrIconLight } from "@/services/logo";
 
 const Header = ({ user }: {user: User }) =>{
     return (

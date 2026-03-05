@@ -9,8 +9,7 @@ import Footer from "@/components/layout/footer";
 import { auth } from "@/services/auth";
 import { Toaster } from "@/components/ui/sonner";
 
-import MoonarrIconLight from '../../public/images/moonarr-light.webp'
-import MoonarrIconDark from '../../public/images/moonarr-dark.webp'
+import { MoonarrIconDark, MoonarrIconLight } from "@/services/logo";
 
 // Vercel
 import { SpeedInsights } from "@vercel/speed-insights/next";
