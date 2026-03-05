@@ -1,36 +1,152 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Moonarr
 
-## Getting Started
+<!-- Put after theses lines, ctrl + shift + p and write "Markdown" and click to "Markdwon all ine one" extension -->
 
-First, run the development server:
+- [Moonarr](#moonarr)
+  - [❓ What is Moonarr ?](#-what-is-moonarr-)
+    - [🪪 Why is it called Moonarr ?](#-why-is-it-called-moonarr-)
+    - [🎯 Our goal](#-our-goal)
+    - [🖼️ Our Logo](#️-our-logo)
+  - [🦾 Which technologies and packages does it use ?](#-which-technologies-and-packages-does-it-use-)
+    - [🧩 Framework](#-framework)
+      - [⚛️➡️ Next.js](#️️-nextjs)
+    - [📦 Packages](#-packages)
+      - [🌊 Tailwind CSS](#-tailwind-css)
+      - [🆔 NextAuth.js](#-nextauthjs)
+      - [📝 Lexkit](#-lexkit)
+      - [💠 Shadcnui](#-shadcnui)
+      - [💠 Jollyui](#-jollyui)
+  - [🏁 Getting Start](#-getting-start)
+    - [📋 PREREQUISITES](#-prerequisites)
+    - [📋 Steps to create or modify your readme](#-steps-to-create-or-modify-your-readme)
+  - [🚧 Development \& Deployment](#-development--deployment)
+    - [⚙️ CONFIGURATION](#️-configuration)
+      - [Create your GitHub Provider](#create-your-github-provider)
+      - [🔏 Environment file](#-environment-file)
+    - [👨‍💻 Local Development](#-local-development)
+    - [🚀 Deployment](#-deployment)
+      - [🏷️ Get The Image](#️-get-the-image)
+      - [🔄 Docker Run](#-docker-run)
+  - [🗪 FAQ](#-faq)
+    - [What's happens if i already don't have a readme profile ?](#whats-happens-if-i-already-dont-have-a-readme-profile-)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ❓ What is Moonarr ?
+
+Moonar is an open-source website, to let user customize his own profile readme, without writing any markdown line !
+
+### 🪪 Why is it called Moonarr ?
+
+### 🎯 Our goal
+
+Our goal with this website is to provide for anyone a solution to get a beautiful Readme for your profile, easier than expected. 🔥
+>[!NOTE]
+> ⭐️ Doesn't forget to give a star if your like this project ! ⭐️
+
+### 🖼️ Our Logo
+
+| dark mode | light mode |
+| :--: | :--: |
+| ![logo](./public/images/moonarr-dark-1200.webp) | ![logo](./public/images/moonarr-light-1200.webp) | 
+
+Theses logos are made with ❤️ using **Adobe Illustator**
+
+## 🦾 Which technologies and packages does it use ?
+
+
+### 🧩 Framework 
+
+#### ⚛️➡️ Next.js
+Next.js is an open-source framework, powered by ⚛︎ React.js and node.js.
+[Next Documentation here](https://nextjs.org/docs)
+
+### 📦 Packages
+
+#### 🌊 Tailwind CSS
+Tailwind CSS is a CSS framework for rapidly building modern websites without ever leaving your HTML.
+[Tailwind CSS Documentation here](https://tailwindcss.com/docs)
+
+#### 🆔 NextAuth.js
+Next-auth is an open-source authentication librabry designed for next.js. Its goal here is to give microsoft entra id authentication.
+[NextAuth.js Documentation here](https://next-auth.js.org/getting-started/introduction)
+
+#### 📝 Lexkit
+[Lexkit Documentation here](https://lexkit.dev/docs/introduction)
+
+#### 💠 Shadcnui
+[Shadcnui Documentation here](https://ui.shadcn.com/docs/installation)
+
+#### 💠 Jollyui
+[Jollyui Documentation here](https://www.jollyui.dev/docs)
+
+## 🏁 Getting Start
+
+### 📋 PREREQUISITES
+
+No prerequisites needed ! Just a GitHub account 😉
+
+### 📋 Steps to create or modify your readme
+
+1. Go to [Moonarr Website](https://moonarr.vercel.app)
+2. Sign In with your GitHub Credentials
+3. If you are not already, go to the [Edit page](https://moonarr.vercel.app/edit)
+
+## 🚧 Development & Deployment
+
+### ⚙️ CONFIGURATION
+
+#### Create your GitHub Provider
+1. Go to [GitHub](https://github.com)
+2. Go to Settings
+3. Scroll down to Developer settings and click
+4. Next, click to OAuth Apps -> New OAuth App
+5. Put your Application name
+6. Put your Homepage URL
+7. Put the Authorization callback URL, which is your **hostname** with `/api/auth/callback/github` at the end, so for example for **moonarr** (https://moonarr.vercel.app), it's `https://moonarr.vercel.app/api/auth/callback/github`
+8. CONFIRM
+9. Keep the client ID
+10. Generate a new client secret and keep it, we need client ID and client secret later.
+
+#### 🔏 Environment file
+
+1. Clone or rename `.env.example` to `.env`
+2. Add required values : 
+   - `AUTH_GITHUB_CLIENT_ID`, the client id for your GitHub Provider 
+   - `AUTH_GITHUB_CLIENT_SECRET`, the client id for your GitHub Provider 
+   - `NEXTAUTH_URL`, The URL of your application
+   - `NEXTAUTH_SECRET`, make `npx auth` or `openssl rand -base64 32`
+>[!NOTE]
+> The client id and client secret of your GitHub Provider is the both one generated at the previous step
+
+### 👨‍💻 Local Development
+
+### 🚀 Deployment
+
+The best way to deploy this project, is to use its image from `Dockerhub` or `GitHub Registry`.
+
+#### 🏷️ Get The Image
+
+`Dockerhub`
+```
+docker pull flizzermdx/moonarr:latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+`GitHub Registry`
+```
+docker pull ghcr.io/flizzermdx/moonarr:latest
+```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+#### 🔄 Docker Run
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```
+docker run --name moonarr -p 3000:3000 -d flizzermdx/moonarr:latest
+```
+>[!NOTE]
+> You can replace `flizzermdx/moonarr:latest` to `ghcr.io/flizzermdx/moonarr:latest` if you wanna use image from GitHub Registry
+> You can also replace `latest` for version you wanna run
 
-## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+## 🗪 FAQ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### What's happens if i already don't have a readme profile ?
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+No worries ! If you don't have the project named like your username for example with me `FlizzerMDX/FlizzerMDX`, with a README.md inside, it's ok ! When you'll be in the /edit page, a message will pop-up and ask you if you wanna create it from scratch or a file
