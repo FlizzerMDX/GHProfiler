@@ -11,10 +11,14 @@
 
 ---
 
+![Moonarr version](https://img.shields.io/github/package-json/v/flizzermdx/moonarr)
+![Moonarr Licence](https://img.shields.io/github/license/flizzermdx/moonarr)
+
 ![GitHub all releases](https://img.shields.io/github/downloads/FlizzerMDX/Moonarr/total)
+![Docker pulls count](https://img.shields.io/docker/pulls/flizzermdx/moonarr)
+
 ![GitHub language count](https://img.shields.io/github/languages/count/FlizzerMDX/Moonarr)
 ![GitHub top language](https://img.shields.io/github/languages/top/FlizzerMDX/Moonarr?color=yellow)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/FlizzerMDX/Moonarr)
 ![GitHub forks](https://img.shields.io/github/forks/FlizzerMDX/Moonarr?style=social)
 ![GitHub Repo stars](https://img.shields.io/github/stars/FlizzerMDX/Moonarr?style=social)
 
@@ -32,11 +36,17 @@
     - [🌊 Tailwind CSS](#-tailwind-css)
     - [🆔 NextAuth.js](#-nextauthjs)
     - [📝 Lexkit](#-lexkit)
-    - [💠 Shadcnui](#-shadcnui)
-    - [💠 Jollyui](#-jollyui)
+    - [💠 ShadcnUi](#-shadcnui)
+    - [💠 JollyUi](#-jollyui)
 - [🏁 Getting Start](#-getting-start)
   - [📋 PREREQUISITES](#-prerequisites)
-  - [📋 Steps to create or modify your readme](#-steps-to-create-or-modify-your-readme)
+  - [📋 How to use](#-how-to-use)
+    - [Website](#website)
+    - [Edition Page](#edition-page)
+  - [Features](#features)
+    - [Readme Editor](#readme-editor)
+    - [Push directly to your profile](#push-directly-to-your-profile)
+    - [Marketplace](#marketplace)
 - [🚧 Development \& Deployment](#-development--deployment)
   - [⚙️ CONFIGURATION](#️-configuration)
     - [Create your GitHub Provider](#create-your-github-provider)
@@ -50,9 +60,14 @@
 
 # ❓ What is Moonarr ?
 
-Moonar is an open-source website, to let user customize his own profile readme, without writing any markdown line !
+Moonar is an open-source website, to help user to customize his own profile readme, without writing any markdown line !
 
 ## 🪪 Why is it called Moonarr ?
+
+This project is called Moonarr because the Moon is a beautiful and powerful entity.
+
+>[!TIP]
+> Also because design a Moon is easier than an octopus 😉
 
 ## 🎯 Our goal
 
@@ -88,12 +103,15 @@ Next-auth is an open-source authentication librabry designed for next.js. Its go
 [NextAuth.js Documentation here](https://next-auth.js.org/getting-started/introduction)
 
 ### 📝 Lexkit
+Lexkit is a Rich text package, with shortkey, text formatting and HTML and Readme handler.
 [Lexkit Documentation here](https://lexkit.dev/docs/introduction)
 
-### 💠 Shadcnui
+### 💠 ShadcnUi
+Shadcnui is a set of many customizable components.
 [Shadcnui Documentation here](https://ui.shadcn.com/docs/installation)
 
-### 💠 Jollyui
+### 💠 JollyUi
+JollyUi is a set of many customizable Shadcnui Based components.
 [Jollyui Documentation here](https://www.jollyui.dev/docs)
 
 # 🏁 Getting Start
@@ -102,11 +120,41 @@ Next-auth is an open-source authentication librabry designed for next.js. Its go
 
 No prerequisites needed ! Just a GitHub account 😉
 
-## 📋 Steps to create or modify your readme
+## 📋 How to use
+
+### Website
 
 1. Go to [Moonarr Website](https://moonarr.vercel.app)
 2. Sign In with your GitHub Credentials
 3. If you are not already, go to the [Edit page](https://moonarr.vercel.app/edit)
+
+### Edition Page
+
+![EditionPage](public/images/documentation/editPage.PNG "Edition page")
+
+This is the Edition page. With this page, we have a lot of feature to help to modify and improve your README.md
+- Emoji Picker
+- Template / Image Stats
+- Text formatting
+- Shortcut key
+- Download README
+- Push README to your GitHub Profile
+
+We can split this view in three part as below.
+
+![EditionPagePart](public/images/documentation/editPagePart.PNG "Edition page Part")
+
+| Red Section | Green Section | Blue Section |
+| :--: | :--: | :--: |
+| Emoji Picker | Edition and Preview | Marketplace |
+
+## Features
+
+### Readme Editor
+
+### Push directly to your profile
+
+### Marketplace
 
 # 🚧 Development & Deployment
 
