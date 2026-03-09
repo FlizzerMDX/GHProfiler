@@ -1,9 +1,49 @@
+"use client";
+import { DockerImageCard } from "@/components/home/docker-image-card";
+import { getDockerhubStats } from "@/services/dockerhub";
+import { Session } from "@/types";
+import { Star } from "lucide-react";
+import { useSession } from "next-auth/react"
+import { useEffect, useState } from "react";
+import { OctokitResponse } from "@octokit/types";
+import { AdventagesCard } from "@/components/home/advantages-card";
+
 export default function Home() {
+  const { data: session } = useSession();
+  const [dockerhubStats, setDockerhubStats] = useState();
+
+  const call = async() => {
+    const userSession = session as Session;
+
+    const dockerStats = await getDockerhubStats();
+    setDockerhubStats(dockerStats);
+  }
+
+  useEffect(() => {
+    call();
+  }, []);
+
   return (
     <div>
-      <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
+      <h1 className="text-9xl font-semibold tracking-tight text-zinc-50 text-center my-20">
         Moonarr
       </h1>
+      <div className="flex gap-20 my-16">
+        <AdventagesCard type="open-source"/>
+        <AdventagesCard type="self-hosted"/>
+        <AdventagesCard type="free"/>
+      </div>
+      <p className="text-2xl w-300 text-center">
+        Moonarr, is a solution to create, modify and improve your GitHub Profile !
+        To modify your GitHub Profile, Moonarr Create a Repository with your username as repository name, and a README.md (if it doesn't exists already). 
+      </p>
+      <div className="flex">
+        <Star className="hover:text-yellow-300"/>
+        <span className="ml-1">
+          Please stars the project to support it.
+        </span>
+      </div>
+      <DockerImageCard data={dockerhubStats} type="Docker"/>
     </div>
   );
 }

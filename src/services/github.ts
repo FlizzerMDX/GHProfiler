@@ -1,3 +1,5 @@
+"use server";
+
 import { Octokit } from "@octokit/core";
 
 import { GithubApiCallSetting as Setting, GithubApiCallReturn as Return, User } from "@/types/index";
@@ -5,7 +7,7 @@ import { GithubApiCallSetting as Setting, GithubApiCallReturn as Return, User } 
 export const getReadmeRepo = async(user: string, token: string) =>{
     const usr = user;
     const repo = user;
-    const params = {
+    const settings = {
         method: "GET",
         url: `/repos/${usr}/${repo}`,
         params: {
@@ -13,14 +15,14 @@ export const getReadmeRepo = async(user: string, token: string) =>{
             repo: repo,
         }
     }
-    const data = await githubApiCall(token, params);
+    const data = await githubApiCall({ token, settings });
     return data;
 }
 
 export const getReadmeContent = async(user: string, token: string) =>{
     const usr = user;
     const repo = user;
-    const params: Setting = {
+    const settings: Setting = {
         method: "GET",
         url: `/repos/${usr}/${repo}/contents/README.md`,
         params: {
@@ -28,7 +30,7 @@ export const getReadmeContent = async(user: string, token: string) =>{
             repo: repo,
         }
     }
-    const data = await githubApiCall(token, params);
+    const data = await githubApiCall({ token, settings });
     const readme = {
         success: data?.data?.content ? true : false,
         content: data?.data?.content ? decodeURIComponent(escape(atob(data?.data?.content))) : ""
@@ -48,7 +50,7 @@ const GetFileData = async({user, token}: {user: User, token: string}) =>{
     const username = user.username;
     const usr = username;
     const repo = username;
-    const params = {
+    const settings = {
         method: "GET",
         url: `/repos/${usr}/${repo}/contents/README.md`,
         params: {
@@ -58,7 +60,7 @@ const GetFileData = async({user, token}: {user: User, token: string}) =>{
         }
     }
 
-    const data = await githubApiCall(token, params);
+    const data = await githubApiCall({ token, settings });
     return data?.data;
 }
 
@@ -69,7 +71,7 @@ export const initReadmeToGithub = async({markdown, user, token}: {markdown: stri
     const usr = username;
     const repo = username;
     const base64 = btoa(unescape(encodeURIComponent(markdown || "<!-- Readme gerenated with Moonarr ! -->")));
-    const params = {
+    const settings = {
         method: "PUT",
         url: `/repos/${usr}/${repo}/contents/README.md`,
         params: {
@@ -85,7 +87,7 @@ export const initReadmeToGithub = async({markdown, user, token}: {markdown: stri
         }
     }
 
-    const data = await githubApiCall(token, params);
+    const data = await githubApiCall({ token, settings });
     return data;
 }
 
@@ -104,7 +106,7 @@ export const pushReadmeToGithub = async({markdown, user, token, message}: {markd
     const usr = username;
     const repo = username;
     const base64 = btoa(unescape(encodeURIComponent(markdown)));
-    const params = {
+    const settings = {
         method: "PUT",
         url: `/repos/${usr}/${repo}/contents/README.md`,
         params: {
@@ -121,7 +123,7 @@ export const pushReadmeToGithub = async({markdown, user, token, message}: {markd
         }
     }
 
-    const data = await githubApiCall(token, params);
+    const data = await githubApiCall({ token, settings });
     return data;
 }
 
@@ -129,7 +131,7 @@ export const createGitHubProject = async({markdown, user, token}: {markdown?: st
     const username = user.username
     const usr = username;
     const repo = username;
-    const params = {
+    const settings = {
         method: "POST",
         url: `/user/repos`,
         params: {
@@ -143,7 +145,7 @@ export const createGitHubProject = async({markdown, user, token}: {markdown?: st
     console.log(markdown)
     console.log("markdown")
 
-    const data = await githubApiCall(token, params);
+    const data = await githubApiCall({ token, settings });
     
     if (markdown){
         const dataPushed = await initReadmeToGithub({markdown, user, token});
@@ -152,7 +154,7 @@ export const createGitHubProject = async({markdown, user, token}: {markdown?: st
     return data;
 }
 
-const githubApiCall = async(token: string, settings: Setting) =>{
+const githubApiCall = async({token, settings}: {token: string, settings: Setting}) =>{
     const octokit = new Octokit({
         auth: token
     })
