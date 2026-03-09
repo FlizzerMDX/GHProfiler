@@ -8,6 +8,16 @@ import { SignOut } from "../auth/signout";
 import { User } from "@/types";
 import Image from "next/image";
 
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu"
+
 import { MoonarrIconDark, MoonarrIconLight } from "@/services/logo";
 
 const Header = ({ user }: {user: User }) =>{
@@ -24,11 +34,21 @@ const Header = ({ user }: {user: User }) =>{
                     Moonarr
                 </span>
             </Link>
-            <nav>
-                <Link href={"/edit"} className="text-2xl hover:text-hover hover:cursor-pointer pl-2 ml-1 sm:block text-white hidden">
-                    Edit page
-                </Link>
-            </nav>
+            <NavigationMenu>
+                <NavigationMenuList>
+                    <NavigationMenuItem>
+                    <NavigationMenuTrigger>Pages</NavigationMenuTrigger>
+                    <NavigationMenuContent>
+                        <NavigationMenuLink href={"/"} className="w-22">
+                            Home Page
+                        </NavigationMenuLink>
+                        <NavigationMenuLink href={"/edit"} className="w-22">
+                            Edit Page
+                        </NavigationMenuLink>
+                    </NavigationMenuContent>
+                    </NavigationMenuItem>
+                </NavigationMenuList>
+            </NavigationMenu>
             {
                 user ? 
                     <SignOut user={user}/>
