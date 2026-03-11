@@ -19,7 +19,7 @@ const getText = (type: string) =>{
         case "open-source":
             return "Open-source"
         case "self-hosted":
-            return "self-hosted"
+            return "Self-hosted"
         default:
             return "100% free"
     }
@@ -27,12 +27,11 @@ const getText = (type: string) =>{
 
 export const AdventagesCard = ({type}: {type: "open-source" | "self-hosted" | "free"}) =>{
     return(
-      <div className="mx-auto flex flex-col items-center justify-items-center text-2xl font-bold inline-block pb-2 text-6xl font-bold bg-gradient-to-r from-[#6cbf9f] to-[#68c7e7] bg-clip-text text-transparent">
+      <div className="mx-auto flex flex-col items-center justify-items-center pb-2 text-6xl font-bold bg-linear-to-r from-[#6cbf9f] to-[#68c7e7] bg-clip-text text-transparent">
         {
             getComponent(type)
         }
-        {/* <span className="text-2xl font-bold inline-block text-6xl font-bold bg-gradient-to-r from-indigo-500 to-pink-600 bg-clip-text text-transparent"> */}
-        <span className="">
+        <span>
             {
                 getText(type)
             }

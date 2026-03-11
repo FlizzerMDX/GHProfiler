@@ -5,11 +5,12 @@ import { UserSearch, LogOutIcon } from "lucide-react"
 import { signOut } from "next-auth/react";
 import { User } from "@/types";
 import Link from "next/link";
+import { cn } from "@/lib/utils";
 
-export const SignOut = ({ user }: {user: User}) => {
+export const SignOut = ({ user, className }: {user: User, className: string}) => {
 	return (
 		<DropdownMenu modal={false}>
-			<DropdownMenuTrigger>
+			<DropdownMenuTrigger className={className}>
 				<div className="flex items-center gap-1.5">
 					<Image
 						src={user?.image || "/default.jpg"}

@@ -22,8 +22,8 @@ import { MoonarrIconDark, MoonarrIconLight } from "@/services/logo";
 
 const Header = ({ user }: {user: User }) =>{
     return (
-        <header className="border-b border-white flex justify-between items-center gap-4 mx-6 px-2 text-xl min-h-20 p-4 z-30">
-            <Link href={"/"} className="content-center text-white hover:text-hover flex gap-2">
+        <header className="border-b border-white grid grid-cols-3 items-center gap-4 mx-6 px-2 text-xl min-h-20 p-4 z-30">
+            <Link href={"/"} className="content-center text-white hover:text-hover flex gap-2 justify-self-start">
                 <Image
                 src={MoonarrIconDark.src}
                 width={30}
@@ -34,11 +34,11 @@ const Header = ({ user }: {user: User }) =>{
                     Moonarr
                 </span>
             </Link>
-            <NavigationMenu>
+            <NavigationMenu className="justify-self-center">
                 <NavigationMenuList>
                     <NavigationMenuItem>
-                    <NavigationMenuTrigger>Pages</NavigationMenuTrigger>
-                    <NavigationMenuContent>
+                    <NavigationMenuTrigger onPointerMove={(event) => event.preventDefault()} onPointerLeave={(event) => event.preventDefault()}>Pages</NavigationMenuTrigger>
+                    <NavigationMenuContent onPointerMove={(event) => event.preventDefault()} onPointerLeave={(event) => event.preventDefault()}>
                         <NavigationMenuLink href={"/"} className="w-22">
                             Home Page
                         </NavigationMenuLink>
@@ -51,9 +51,9 @@ const Header = ({ user }: {user: User }) =>{
             </NavigationMenu>
             {
                 user ? 
-                    <SignOut user={user}/>
+                    <SignOut user={user} className={"justify-self-end"}/>
                     :
-                    <SignIn/>
+                    <SignIn className={"justify-self-end"}/>
             }
         </header>
     );

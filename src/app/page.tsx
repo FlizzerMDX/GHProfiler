@@ -25,10 +25,10 @@ export default function Home() {
 
   return (
     <div>
-      <h1 className="text-9xl font-semibold tracking-tight text-zinc-50 text-center my-20">
+      <h1 className="text-9xl font-semibold tracking-tight text-zinc-50 text-center">
         Moonarr
       </h1>
-      <div className="flex gap-20 my-16">
+      <div className="grid grid-cols-3 gap-20 my-16">
         <AdventagesCard type="open-source"/>
         <AdventagesCard type="self-hosted"/>
         <AdventagesCard type="free"/>
@@ -37,13 +37,13 @@ export default function Home() {
         Moonarr, is a solution to create, modify and improve your GitHub Profile !
         To modify your GitHub Profile, Moonarr Create a Repository with your username as repository name, and a README.md (if it doesn't exists already). 
       </p>
-      <div className="flex">
+      {/* <div className="flex">
         <Star className="hover:text-yellow-300"/>
         <span className="ml-1">
           Please stars the project to support it.
         </span>
       </div>
-      <DockerImageCard data={dockerhubStats} type="Docker"/>
+      <DockerImageCard data={dockerhubStats} type="Docker"/> */}
     </div>
   );
 }
