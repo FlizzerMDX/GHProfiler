@@ -110,6 +110,12 @@ jobs:
                       type=raw,value=${{ steps.set_tag.outputs.tag }}
                       type=raw,value=latest,enable=${{ github.event_name == 'push' }}
 
+            - name: Install dependencies
+              run: npm ci
+
+            - name: Run lint check
+              run: npm run lint
+
             - uses: docker/build-push-action@v6
               with:
                   context: .
