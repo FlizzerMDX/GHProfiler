@@ -22,6 +22,8 @@
 ![GitHub forks](https://img.shields.io/github/forks/FlizzerMDX/Moonarr?style=social)
 ![GitHub Repo stars](https://img.shields.io/github/stars/FlizzerMDX/Moonarr?style=social)
 
+![Alt](https://repobeats.axiom.co/api/embed/a6506d45b84f08e0544e08cc87c03bea4f812399.svg "Repobeats analytics image")
+
 <!-- Put after theses lines, ctrl + shift + p and write "Markdown" and click to "Markdwon all ine one" extension -->
 
 - [Moonarr](#moonarr)
